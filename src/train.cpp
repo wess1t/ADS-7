@@ -27,8 +27,6 @@ int Train::getOpCount() {
 int Train::getLength() {
     if (!first) return 0;
 
-    bool initialLight = first->light;
-
     if (!first->light) {
         first->light = true;
     }
@@ -51,7 +49,7 @@ int Train::getLength() {
             }
 
             if (!first->light) {
-                first->light = initialLight;
+                first->light = true;
                 return length + 1;
             } else {
                 length++;
