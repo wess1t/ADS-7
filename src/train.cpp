@@ -34,7 +34,6 @@ int Train::getLength() {
 
     while (true) {
         Car* current = marker;
-        
         for (int i = 0; i < length; i++) {
             current = current->next;
             countOp++;
