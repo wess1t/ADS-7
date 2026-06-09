@@ -40,24 +40,23 @@ int Train::getLength() {
         }
 
         int steps = 0;
-        while (!walker->light) {
+        while (walker->light == current->light) {
             walker = walker->next;
             countOp++;
             steps++;
         }
 
-        if (steps == 0 && walker == current) {
+        if (steps == length && walker == current) {
             return length;
         }
 
-        walker->light = false;
+        walker->light = current->light;
         length++;
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < steps; i++) {
             walker = walker->prev;
             countOp++;
         }
         current = walker;
-        current->light = true;
     }
 }
