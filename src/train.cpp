@@ -62,4 +62,3 @@ int Train::getLength() {
         first = current;
     }
 }
-}
