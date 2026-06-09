@@ -25,30 +25,37 @@ int Train::getOpCount() {
 
 int Train::getLength() {
     if (!first) return 0;
-    if (!first->light) {
-        first->light = true;
-    }
-    int length = 0;
+
+    countOp = 0;
+    first->light = true;
+    int length = 1;
     Car* current = first;
+
     while (true) {
-        for (int i = 0; i <= length; i++) {
-            current = current->next;
+        Car* walker = current;
+        for (int i = 0; i < length; i++) {
+            walker = walker->next;
             countOp++;
         }
-        if (current->light) {
-            current->light = false;
-            for (int i = 0; i <= length; i++) {
-                current = current->prev;
-                countOp++;
-            }
-            if (!first->light) {
-                first->light = true;
-                return length + 1;
-            } else {
-                length++;
-            }
-        } else {
-            length++;
+
+        int steps = 0;
+        while (walker->light) {
+            walker = walker->next;
+            countOp++;
+            steps++;
         }
+
+        if (steps == 0 && walker == current) {
+            return length;
+        }
+
+        walker->light = true;
+        length++;
+
+        for (int i = 0; i < length; i++) {
+            walker = walker->prev;
+            countOp++;
+        }
+        current = walker;
     }
 }
