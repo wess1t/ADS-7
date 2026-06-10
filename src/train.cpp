@@ -32,31 +32,9 @@ int Train::getLength() {
         first->light = true;
     }
 
-    int length = 0;
+    int length = 1;
     Car* current = first;
 
     while (true) {
-        for (int i = 0; i <= length; i++) {
-            current = current->next;
-            countOp++;
-        }
-
-        if (current->light) {
-            current->light = false;
-
-            for (int i = 0; i <= length; i++) {
-                current = current->prev;
-                countOp++;
-            }
-
-            if (!first->light) {
-                first->light = true;
-                return length + 1;
-            } else {
-                length++;
-            }
-        } else {
-            length++;
-        }
-    }
-}
+        for (int i = 0; i < length; i++) {
+            current
